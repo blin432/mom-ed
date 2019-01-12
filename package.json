@@ -33,6 +33,6 @@
     "sequelize": "^4.42.0",
     "session": "^0.1.0"
   },
-  "devDependencies": {},
-  "description": ""
+  "devDependencies": {}
+  
 }
