@@ -12,25 +12,28 @@ app.use (bodyParser.urlencoded({extended:false}));
 
 app.set('view engine', 'ejs');
 app.set ('views','app/views'); //need to set when path is defined
+const db= require('/models');  //need to set path
 
-// const db= require('./models');  //need to set path
-
-// app.post('/api/username/:addUsername',function(req,res,next){
-//     if(!user){
-//         db.users.create({userName:'Eric',email:'blin432@gmail.com',password:'asdfasf'})
-//         .then(function(user){
-//             console.log(user);
-//         });
-//     } else{
-//         res.send(err);
-//     }; 
-// });
+app.post('/api/username/:addUsername',function(req,res,next){
+    console.log(db.users)
+    if(!user){
+        db.users.create({userName:'Eric',email:'blin432@gmail.com',password:'asdfasf'})
+        .then(function(user){
+            console.log(user);
+        });
+    } else{
+        res.send(err);
+    }; 
+});
 
  
 
-
-app.listen(3000,function(){
+var PORT = process.env.PORT || 3000;
+db.sequelize.sync().then(function(){
+    app.listen(PORT,function(){
     console.log('listening on port 3000..');
 });
+})
+
 
 app.use(express.static('public'));
