@@ -1,7 +1,6 @@
 {
   "name": "group-project-2",
   "version": "1.0.0",
-  "description": "",
   "main": "main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -28,5 +27,7 @@
     "pg-hstore": "^2.3.2",
     "sequelize": "^4.42.0",
     "session": "^0.1.0"
-  }
+  },
+  "devDependencies": {},
+  "description": ""
 }
