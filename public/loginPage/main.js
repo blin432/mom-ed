@@ -58,6 +58,15 @@ function loginToExistingAccount(){
         console.log(err);
     });
 
-    
+}
+
+function editSchedule(presentScheduleItem){
+    var editTaskInput=getElementById('');
+    schduleEditEndpoint=`/api/schedule/`;
+        axios.put(scheduleEditEndpoint).then(function(res){
+            console.log(res);
+        }).catch(function(err){
+            console.log(err);
+        });
 }
 
