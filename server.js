@@ -9,6 +9,7 @@ const db= require('./models');
 var app = express();
 
 app.use (bodyParser.json());
+
 app.use (bodyParser.urlencoded({extended:true}));
 app.use(session({secret:'password'}));
 
@@ -81,7 +82,7 @@ app.post('/auth/login',passport.authenticate('local'),function(req,res,next){
 // if not logged in will respond with null
 // app.get('/auth/user',function(req,res,next){
 //     res.json(req.user.email);
-// });
+
 
 function isAuthenticated(req,res,next){
     if(req.isAuthenticated()){
@@ -113,10 +114,26 @@ app.put('/schedule/edit',function(req,res,next){
 
 
 
+
 app.use(express.static('public'));
 var PORT = process.env.PORT || 3000;
 db.sequelize.sync().then(function(){
     app.listen(PORT,function(){
+
+app.get('/login', function(req,res){
+    res.render('login');
+});
+
+app.get('/', function(req, res) {
+    res.render('home');
+});
+
+app.set('view engine', 'ejs');
+app.set ('views','views/pages'); //need to set when path is defined
+
+
+app.listen(3000,function(){
+
     console.log('listening on port 3000..');
 });
 })
