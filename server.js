@@ -5,17 +5,34 @@ const passport =require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const session = require('express-session');
 
+
 const db= require('./models'); 
 var app = express();
 
 app.use (bodyParser.json());
-
 app.use (bodyParser.urlencoded({extended:true}));
 app.use(session({secret:'password'}));
+app.use(passport.initialize());
+app.use(passport.session());
 
-// app.set('view engine', 'ejs'); //set when ejs template is done
-// app.set ('views','app/views'); //need to set when path is defined
- 
+
+app.set('view engine', 'ejs');
+app.set ('views','views/pages'); 
+app.use(express.static('views'));
+
+app.get('/login', function(req,res){
+    
+    
+}); 
+
+
+app.get('/', function(req, res) {
+    res.render('home',{
+        title: "Home"
+    });
+}); 
+
+
 
 
 passport.use(new LocalStrategy({usernameField:'email'},function(email,password,done){
@@ -40,8 +57,9 @@ passport.use(new LocalStrategy({usernameField:'email'},function(email,password,d
                     });  
 }));
 
-app.use(passport.initialize());
-app.use(passport.session());
+
+
+
 
 passport.serializeUser(function(user,done){
     
@@ -115,27 +133,15 @@ app.put('/schedule/edit',function(req,res,next){
 
 
 
-app.use(express.static('public'));
+
 var PORT = process.env.PORT || 3000;
 db.sequelize.sync().then(function(){
-    app.listen(PORT,function(){
-
-app.get('/login', function(req,res){
-    res.render('login');
+    app.listen(PORT,function(){ console.log('listening on port 3000');
+    })
 });
 
-app.get('/', function(req, res) {
-    res.render('home');
-});
-
-app.set('view engine', 'ejs');
-app.set ('views','views/pages'); //need to set when path is defined
 
 
-app.listen(3000,function(){
 
-    console.log('listening on port 3000..');
-});
-})
 
 
