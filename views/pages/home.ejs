@@ -1,13 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-        <meta charset="utf-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title> <%= (typeof title != "undefined" ? title : "") %> </title>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-        <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
-        <link href="https://fonts.googleapis.com/css?family=Fredoka+One|Roboto+Condensed|Anton" rel="stylesheet">
+    <% include ../partials/head.ejs %>
 </head>
 
 
@@ -35,11 +29,7 @@
     </div>
 
 <div class="footer">
-    <div class="container4">
-        <h5> MOM'D</h5> 
-        <p> 3423 Piedmont Rd NE <br> Atlanta, Ga 30305 <br> info@MOM'D.com</p>
-        <p>© Copyright 2018 MOM'D Inc.</p>
-    </div>
+        <% include ../partials/footer.ejs %>
 </div>
     
     <script src="main.js"></script>  
