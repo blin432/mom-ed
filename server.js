@@ -10,8 +10,6 @@ var app = express();
 app.use (bodyParser.json());
 app.use (bodyParser.urlencoded({extended:false}));
 
-app.set('view engine', 'ejs');
-app.set ('views','app/views'); //need to set when path is defined
 
 // const db= require('./models');  //need to set path
 
@@ -27,6 +25,24 @@ app.set ('views','app/views'); //need to set when path is defined
 // });
 
  
+
+
+app.get('/login', function(req,res){
+    res.render('login', {
+        title : 'Login page'
+    });
+});
+
+app.get('/', function(req, res) {
+    res.render('home', {
+        title : "Home"
+    });
+    
+    
+});
+
+app.set('view engine', 'ejs');
+app.set ('views','views/pages'); //need to set when path is defined
 
 
 app.listen(3000,function(){

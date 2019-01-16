@@ -3,22 +3,19 @@
 <html>
 
     <head>
-        <title>MOM'D</title>
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-        <link rel="stylesheet" type="text/css" href="main.css">
-        <meta content="width=device-width, initial-scale=1" name="viewport" /> 
+        <% include ../partials/head.ejs %> 
     </head>
 
         <body>
             <div class="text-center pt-3">
                     <div id ="existing-member" style="display:block;">
-                        <h1>Already a Member?</h1>
+                        <h4>Already a Member?</h4>
                         <div class="buttons">
                             <button onclick="showLoginForm()" id="log-in-button" class="btn btn-secondary mb-2">Log in</button>
                         </div>   
                     </div>
                     <div id="sign-up" style="display:block;">
-                            <h1>New Member?</h1>
+                            <h4>New Member?</h4>
                             <div class="buttons">
                                 <button onclick="showSignUpForm()" id="sign-up-button" class="btn btn-secondary mb-2">Sign up</button>
                             </div>
