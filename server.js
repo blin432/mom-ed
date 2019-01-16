@@ -28,11 +28,17 @@ app.use (bodyParser.urlencoded({extended:false}));
 
 
 app.get('/login', function(req,res){
-    res.render('login');
+    res.render('login', {
+        title : 'Login page'
+    });
 });
 
 app.get('/', function(req, res) {
-    res.render('home');
+    res.render('home', {
+        title : "Home"
+    });
+    
+    
 });
 
 app.set('view engine', 'ejs');
