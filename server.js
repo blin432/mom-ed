@@ -20,19 +20,21 @@ app.set('view engine', 'ejs');
 app.set ('views','views/pages'); 
 app.use(express.static('views'));
 
-app.get('/login', function(req,res){
-    
-    
-}); 
 
+
+app.get('/login', function(req,res){
+    res.render('login', {
+        title : 'Login page'
+    });
+});
 
 app.get('/', function(req, res) {
-    res.render('home',{
-        title: "Home"
+    res.render('home', {
+        title : "Home"
     });
-}); 
-
-
+    
+    
+});
 
 
 passport.use(new LocalStrategy({usernameField:'email'},function(email,password,done){
@@ -93,7 +95,7 @@ app.post('/auth/register',function(req,res,next){ //registers the user to databa
 // passport.authenticate('local'); endpoint will only run if logged in
 app.post('/auth/login',passport.authenticate('local'),function(req,res,next){
     res.json({status:'okay'});
-});
+
 
 
 // to check if people are logging in and show email on screen
@@ -137,7 +139,7 @@ app.put('/schedule/edit',function(req,res,next){
 var PORT = process.env.PORT || 3000;
 db.sequelize.sync().then(function(){
     app.listen(PORT,function(){ console.log('listening on port 3000');
-    })
+    });
 });
 
 
