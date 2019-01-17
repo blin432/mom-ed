@@ -22,34 +22,32 @@ function showLoginForm(){
 }
 
 function showSignUpForm(){
-
     existingMember.style.setProperty("display","none");
     signUpButton.style.setProperty("display","none");
     createAccountButton.style.setProperty("display","block");
     loginButton.style.setProperty("display","none");
     authBox.style.setProperty("display","block");
     signUpForm.style.setProperty("display","block");
-    
 }
 
 function cancel(){
     location.reload();
 }
 
-function createNewAccount(){
+// pasport functions////
 
+//write users to the database using sequelize
+function createNewAccount(){
     axios.post('/auth/register', { username: userName.value, email: userEmail.value, password: userPassword.value }).then(function(response) {
-      
-        var user = response.data;
-        
+        var user = response.data.username;
+        console.log(user);
         alert(`Account created for ${user}`);
     }).catch(function(){
-        // alert(`That user is already registered`);
+        alert(`That user is already registered`);
     });
-
-
 }
 
+//
 function loginToExistingAccount(){
     axios.post('/auth/login',{email:loginEmail.value,password:loginPw.value}).then(function(response){
         console.log(response);
@@ -57,9 +55,13 @@ function loginToExistingAccount(){
     }).catch(function(err){
         console.log(err);
     });
-
 }
 
+
+
+
+
+///function to write "write and get from database begins here"
 function editSchedule(presentScheduleItem){
     var editTaskInput=getElementById('');
     schduleEditEndpoint=`/api/schedule/`;
