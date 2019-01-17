@@ -1,9 +1,12 @@
+
+
 {
   "development": {
-    "username": "postgres",
-    "password": null,
-    "database": "momd",
-    "host": "127.0.0.1",
+    "use_env_variable": "DATABASE_URL",
+    "username": "cafknjfhwadoew",
+    "password": "43cb6b745afcf5239bdf8ed2aead08190a0d6ee71e7b0e28921ae0f4e1aed8ef",
+    "database": "d6f0qbhegnjkep",
+    "host": "ec2-107-22-162-8.compute-1.amazonaws.com",
     "dialect": "postgres"
   },
   "test": {
@@ -14,10 +17,11 @@
     "dialect": "mysql"
   },
   "production": {
-    "username": "root",
-    "password": null,
-    "database": "database_production",
-    "host": "127.0.0.1",
-    "dialect": "mysql"
+    "use_env_variable": "DATABASE_URL",
+    "username": "cafknjfhwadoew",
+    "password": "43cb6b745afcf5239bdf8ed2aead08190a0d6ee71e7b0e28921ae0f4e1aed8ef",
+    "database": "d6f0qbhegnjkep",
+    "host": "ec2-107-22-162-8.compute-1.amazonaws.com",
+    "dialect": "postgres"
   }
 }
