@@ -8,12 +8,32 @@ const env = process.env.NODE_ENV || 'development';
 const config = require(__dirname + '/../config/config.json')[env];
 const db = {};
 
-let sequelize;
-if (config.use_env_variable) {
-  sequelize = new Sequelize(process.env[config.use_env_variable], config);
+
+
+var sequelize = require('sequelize-heroku').connect(require('sequelize'));
+
+if (sequelize) {
+    sequelize.authenticate().then( function() {
+        var config = sequelize.connectionManager.config;
+        console.log('sequelize-heroku: Connected to '+config.host+' as '+config.username+'.');
+        
+        sequelize.query('SELECT 1+1 as test').then( function(res) {
+            console.log('1+1='+res[0][0].test);
+        });
+        
+    }).catch( function(err) {
+        var config = sequelize.connectionManager.config;
+        console.log('Sequelize: Error connecting '+config.host+' as '+config.user+': '+err);
+    });
 } else {
-  sequelize = new Sequelize(config.database, config.username, config.password, config);
+    console.log('No environnement variable found.');
 }
+// let sequelize;
+// if (config.use_env_variable) {
+//   sequelize = new Sequelize(process.env[config.use_env_variable], config);
+// } else {
+//   sequelize = new Sequelize(config.database, config.username, config.password, config);
+// }
 
 fs
   .readdirSync(__dirname)
