@@ -16,27 +16,31 @@
         <div class="scheduleInput">
             <ul>
                 <li> Who's activity?<br>
-                    <input value="ex. Sarah"> </input>
+                    <input id="name-for-schedule" type="text" name="name" placeholder="ex. Sarah"> </input>
                 </li>
 
                 <li> What needs to be scheduled?<br>
-                    <input value="ex. soccer practice"> </input>
+                    <input id="event-for-schedule" type="text" name="event" placeholder="ex. soccer practice"> </input>
                 </li>
 
                 <li> Date of activity? <br>
-                    <input value="mm/dd/yyyy"> </input>
+                    <input id="date-for-schedule" type="text" name="date" placeholder="ex. mm/dd/yyyy""> </input>
                 </li>
                 
                 <li> Time?<br>
-                    <input value="3:00pm"> </input>
+                    <input id="time-for-schedule" type="text" name="time" placeholder="6:00pm"> </input>
                 </li>
             </ul>
+        </div>
+        <div class="buttons">
+            <button onclick="showSchedulerForm()" type="submit">Schedule Me!</button>
         </div>
     </div>
     
     
     
-    <script src="main.js"></script>  
+    <script src="/main.js"></script>  
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
