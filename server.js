@@ -6,7 +6,7 @@ const LocalStrategy = require('passport-local').Strategy;
 const session = require('express-session');
 
 
-const db= require('./models'); 
+const db= require('./config/db.config.js'); 
 var app = express();
 
 app.use (bodyParser.json());
@@ -143,6 +143,7 @@ console.log(req.body);
 
 
 //running the server to listen on "PORT"
+process.env.PORT=8080;
 var PORT = process.env.PORT || 3000;
 
 db.sequelize.sync().then(function(){
