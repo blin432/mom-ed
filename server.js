@@ -129,7 +129,6 @@ app.put('/schedule/edit',function(req,res,next){
 
 
 //running the server to listen on "PORT"
-process.env.PORT=8080;
 var PORT = process.env.PORT || 3000;
 
 db.sequelize.sync().then(function(){
