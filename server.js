@@ -14,7 +14,7 @@ app.use (bodyParser.urlencoded({extended:true}));
 app.use(session({secret:'password'}));
 app.use(passport.initialize());
 app.use(passport.session());
-app.use(express.static('public'));
+app.use(express.static(__dirname + '/public'));
 
 app.set('view engine', 'ejs');
 app.set ('views','views/pages'); 
@@ -143,11 +143,10 @@ console.log(req.body);
 
 
 //running the server to listen on "PORT"
-process.env.PORT=8080;
 var PORT = process.env.PORT || 3000;
 
 db.sequelize.sync().then(function(){
     app.listen(PORT,function(){ 
-        console.log(`listening on port ${PORT}..`);
+        // console.log(`listening on port ${PORT}..`);
     });
 });
