@@ -42,19 +42,25 @@ function createNewAccount(){
         var user = response.data.username;
         console.log(user);
         alert(`Account created for ${user}`);
+        window.location = response.data.URL;
+        
     }).catch(function(){
         alert(`That user is already registered`);
     });
+    
+
 }
 
 //
 function loginToExistingAccount(){
     axios.post('/auth/login',{email:loginEmail.value,password:loginPw.value}).then(function(response){
-        console.log(response);
-        alert('succes');
+        console.log(response.data);
+        alert('success');
+        window.location = response.data.URL;
     }).catch(function(err){
         console.log(err);
     });
+   
 }
 
 
