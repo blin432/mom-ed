@@ -72,3 +72,13 @@ function editSchedule(presentScheduleItem){
         });
 }
 
+function createNewAccount(){
+    axios.delete('/schedule/delete', { currentTask: currentTask.value}).then(function(response) {
+        var user = response.data.username;
+        console.log(user);
+        alert(`Account created for ${user}`);
+    }).catch(function(){
+        alert(`That user is already registered`);
+    });
+}
+
