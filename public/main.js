@@ -15,6 +15,7 @@ var user = document.getElementById("name-for-schedule");
 var date = document.getElementById("date-for-schedule");
 var event = document.getElementById("event-for-schedule");
 var time = document.getElementById("time-for-schedule");
+var scheduleShow = document.getElementById("show-schedule");
 
 
 function showLoginForm(){
@@ -81,17 +82,7 @@ function loginToExistingAccount(){
 
 ///function to write "write and get from database begins here"
 function editSchedule(presentScheduleItem){
-    var editTaskInput=getElementById('');
-    schduleEditEndpoint=`/api/schedule/`;
-        axios.put(scheduleEditEndpoint).then(function(res){
-            console.log(res);
-        }).catch(function(err){
-            console.log(err);
-        });
-}
-
-function showSchedulerForm(){
-    axios.post('/auth/schedule', {name:user.value,event:event.value,date:date.value}).then(function(response) {
+    axios.post('/schedule/edit', {name:user.value,event:event.value,date:date.value}).then(function(response) {
         var user = response;
         console.log(user);
         // alert(`Schedule created for ${name}`);
@@ -100,16 +91,58 @@ function showSchedulerForm(){
     });
 }
 
+function showSchedulerForm(){
+    axios.post('/schedule/post', {name:user.value,event:event.value,date:date.value}).then(function(response) {
+        var user = response;
+        console.log(user);
+        // alert(`Schedule created for ${name}`);
+    }).catch(function(){
+        alert(`Please fill form in it's entirety`);
+    });
+}
 
-// function createNewAccount(){
-//     axios.delete('/schedule/delete', { currentTask: currentTask.value}).then(function(response) {
-//         var user = response.data.username;
-//         console.log(user);
-//         alert(`Account created for ${user}`);
-//     }).catch(function(){
-//         alert(`That user is already registered`);
-//     });
-// }
+function showSchedule(){
+    
+    axios.get('/schedule/get').then(function(response) {
+        var user = response.data;
+        console.log(user);
+        arrayIndex=0;
+        var grabbedTask=response.data[arrayIndex].name;
+        var id = response.data[arrayIndex].id;
+      
+        response.data.forEach(function(task){
+            console.log(task);
+            var name= task.name;
+            var id = task.id;
+            var grabbedTask= task.event;
+            scheduleShow.innerHTML+=
+            
+            `<div style:"block;" id=${id}>
+                <li id="list-${id}">${grabbedTask}</li> <span>
+                <span class="tex-align:center" >
+                    <button type="button" onclick="deleteSchedule(${id})" class= "btn-primary" >Delete</button>
+                    <button type="button" onclick="completeTask(${id})" class= "btn-primary" >Complete</button>
+                    <button type="button" onclick="editAppear(${id})" class= "btn-primary" >Edit</button>
+                    <input id="edit-field${id}" style="display:none;"  type="text" class="form-control" >
+                    <button id="save-button${id}" style="display:none;"  type="button" onclick="editTask(${id})"  class= "btn-primary" >Save Change</button>
+                </span>
+            </div>`;               
+        });
+    });
+}
+
+
+
+
+function deleteSchedule(idNumber){
+    axios.delete(`/schedule/delete/${idNumber}`).then(function(response) {
+        var user = response.data.username;
+        console.log(user);
+        alert(`Account created for ${user}`);
+    }).catch(function(){
+        alert(`That user is already registered`);
+    });
+}
 
 
 
