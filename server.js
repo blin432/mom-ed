@@ -37,6 +37,8 @@ app.get('/dashboard', function(req, res) {
         title : "Dashboard"
     });
 });
+
+ 
 //EJS templating stops here/////////
 
 //passport usage begins here /////
@@ -113,22 +115,59 @@ function isAuthenticated(req,res,next){
 
 ///dashboard "writing and pulling from database" to render schedules start here//////
  
-app.put('/schedule/edit',function(req,res,next){
-    console.log(req.body);
-    users.update(
-        {username:req.body.username},
-        {where:req.params.edit}
-    )
-    .then(function(rowsUpdate){
-        res.json(rowsUpdate)
-    })
-    .catch(next);
+// app.put('/schedule/edit',function(req,res,next){
+//     console.log(req.body);
+//     users.update(
+//         {username:req.body.username},
+//         {where:req.params.edit}
+//     )
+//     .then(function(rowsUpdate){
+//         res.json(rowsUpdate)
+//     })
+//     .catch(next);
+// });
+
+
+app.post('/auth/schedule',function(req, res){
+
+   
+console.log(req.body);
+    db.Schedule.create({name:req.body.name,event:req.body.event,date:req.body.date})
+        .then(function(user){
+            console.log(user);
+            res.json({username:req.body.name}); ///res.json sends it back to front end 
+        }).catch(function(err){
+            console.log(err);
+        });
 });
+//Deleting from database
+app.delete('/schedule/delete',function(req,res,next){ //registers the user to database
+    console.log(req.body);
+       
+        
+        // db.users.create({username:req.body.username,email:req.body.email,password:hashedPw})
+        // .then(function(user){
+        //     console.log(user);
+        //     res.json({username:req.body.username}); ///res.json sends it back to front end 
+        // }).catch(function(err){
+        //     console.log(err);
+        // });
 
+        db.destroy({
+            where: {
+               id: 123 //this will be your id that you want to delete
+            }
+            }).then(function(rowDeleted){ // rowDeleted will return number of rows deleted
+            if(rowDeleted === 1){
+              console.log('Deleted successfully');
+            }
+            }, function(err){
+             console.log(err);
 
+// app.listen(3000,function () {
+//     console.log('Successfully started express application');
 
-
-
+// });
 
 
 

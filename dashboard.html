@@ -20,14 +20,6 @@
                 <div class="collapse navbar-collapse" id="navbarText">
                   <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
-                      <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link" href="#">Features</a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link" href="#">Pricing</a>
-                    </li>
                   </ul>
                   <span class="navbar-text">
                     Navbar text with an inline element
@@ -42,20 +34,22 @@
 
             <h2>Add Event Below:</h2>
             <form action="nowhere">
-                <input type="text" placeholder="Event goes here"><input type="color">
+                <input type="text"  placeholder="Event goes here" id="user_input"> <input type="color" >
                 <br>
                 Date:
                 <br>
-                <input type="date" placeholder="What day?" onclick="">
+                <input type="date" placeholder="What day?" onclick="" id="user_input">
                 <br>
                 Time:
                 <br>
-                <input type="time" placeholder="What time?" onclick="">
+                <input type="time" placeholder="What time?" onclick="" id="user_input">
                 
-                <br><br>
-                <input type="submit" value="Submit">
             </form>
-
+            <br>
+            <input type="submit" value="Submit" onclick="showInput();">
+            <br> <hr>
+            <label>Upcoming Events:</label>
+            <p><span id="display"></span></p>
 
 
            
