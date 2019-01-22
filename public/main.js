@@ -78,11 +78,18 @@ function loginToExistingAccount(){
 
 
 
-
+function editAppear(editIndex){
+    var showChangeButton= document.getElementById(`save-button${editIndex}`);
+    var showEditField = document.getElementById(`edit-field${editIndex}`);
+    showChangeButton.style.setProperty("display","block");
+    showEditField.style.setProperty("display","block");
+}
 
 ///function to write "write and get from database begins here"
-function editSchedule(presentScheduleItem){
-    axios.post('/schedule/edit', {name:user.value,event:event.value,date:date.value}).then(function(response) {
+function editTask(presentTaskId){
+    var editTaskInput=document.getElementById(`edit-field${presentTaskId}`);
+
+    axios.put(`/schedule/edit/${editTaskInput.value}/edit/${presentTaskId}`).then(function(response) {
         var user = response;
         console.log(user);
         // alert(`Schedule created for ${name}`);

@@ -115,11 +115,12 @@ function isAuthenticated(req,res,next){
 
 ///dashboard "writing and pulling from database" to render schedules start here//////
  
-app.put('/schedule/edit',function(req,res,next){
-    console.log(req.body);
-    users.update(
-        {username:req.body.username},
-        {where:req.params.edit}
+app.put('/schedule/edit/:editTask/edit/:id',function(req,res,next){
+    
+    console.log(req.params);
+    db.schedule.update(
+        {name:req.params.editTask},
+        {where:req.params.id}
     )
     .then(function(rowsUpdate){
         res.json(rowsUpdate)
