@@ -21,6 +21,7 @@ db.sequelize = sequelize;
  
 //Models/tables
 db.users = require('../models/users.js')(sequelize, Sequelize);
+db.schedule = require('../models/schedule.js')(sequelize, Sequelize);
  
  
 module.exports = db;

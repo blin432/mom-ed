@@ -7,7 +7,7 @@ const session = require('express-session');
 
 
 const db= require('./config/db.config.js'); 
-var app = express();
+const app = express();
 
 app.use (bodyParser.json());
 app.use (bodyParser.urlencoded({extended:true}));
@@ -36,13 +36,13 @@ app.get('/dashboard', function(req, res) {
     res.render('dashboard', {
         title : "Dashboard"
     });
- });
+});
+
  
 //EJS templating stops here/////////
 
 //passport usage begins here /////
 passport.use(new LocalStrategy({usernameField:'email'},function(email,password,done){
-    console.log('hi');
     db.users.findAll({where:{email:email}}) //finding artist ID to print to console
         .then(function(results){
             var fetchedPw= results[0].dataValues.password;//console log results to see how to get password
@@ -83,7 +83,7 @@ app.post('/auth/register',function(req,res,next){ //registers the user to databa
         db.users.create({username:req.body.username,email:req.body.email,password:hashedPw})
         .then(function(user){
             console.log(user);
-            res.json({username:req.body.username}); ///res.json sends it back to front end 
+            res.json({username:req.body.username,URL:'dashboard'}); ///res.json sends it back to front end 
         }).catch(function(err){
             console.log(err);
         });
@@ -91,7 +91,7 @@ app.post('/auth/register',function(req,res,next){ //registers the user to databa
 });
 // passport.authenticate('local'); endpoint will only run if logged in
 app.post('/auth/login',passport.authenticate('local'),function(req,res,next){
-    res.json({status:'okay'});
+    res.json({URL:'dashboard'});
 });
 
 // app.get('/auth/logout',function(req,res,next){
@@ -115,47 +115,52 @@ function isAuthenticated(req,res,next){
 
 ///dashboard "writing and pulling from database" to render schedules start here//////
  
-// app.put('/schedule/edit',function(req,res,next){
-//     console.log(req.body);
-//     users.update(
-//         {username:req.body.username},
-//         {where:req.params.edit}
-//     )
-//     .then(function(rowsUpdate){
-//         res.json(rowsUpdate)
-//     })
-//     .catch(next);
-// });
+app.put('/schedule/edit/:editTask/edit/:id',function(req,res,next){
+    
+    console.log(req.params);
+    db.schedule.update(
+        {name:req.params.editTask},
+        {where:req.params.id}
+    )
+    .then(function(rowsUpdate){
+        res.json(rowsUpdate)
+    })
+    .catch(next);
+});
 
+app.get('/schedule/get',function(req, res,next){
+    db.schedule.findAll() 
+        .then(function(results){
+            res.json(results);
+                
+ });  
+});
 
-app.post('/auth/schedule',function(req, res){
+app.post('/schedule/post',function(req, res,next){
 
    
 console.log(req.body);
-    db.Schedule.create({name:req.body.name,event:req.body.event,date:req.body.date})
+    db.schedule.create({name:req.body.name,event:req.body.event,date:req.body.date})
         .then(function(user){
             console.log(user);
-            res.json({username:req.body.name}); ///res.json sends it back to front end 
+            res.json({username:req.body.name});
+            return next(); ///res.json sends it back to front end 
         }).catch(function(err){
             console.log(err);
         });
 });
-//Deleting from database
-app.delete('/schedule/delete',function(req,res,next){ //registers the user to database
-    console.log(req.body);
-       
-        
-        // db.users.create({username:req.body.username,email:req.body.email,password:hashedPw})
-        // .then(function(user){
-        //     console.log(user);
-        //     res.json({username:req.body.username}); ///res.json sends it back to front end 
-        // }).catch(function(err){
-        //     console.log(err);
-        // });
 
-        db.destroy({
+
+
+
+app.delete('/schedule/delete/:id',function(req,res,next){ //registers the user to database
+    console.log(req);
+    console.log(req.body);
+    console.log(req.params);
+       
+        db.schedule.destroy({
             where: {
-               id: 123 //this will be your id that you want to delete
+               id: req.body.id //this will be your id that you want to delete
             }
             }).then(function(rowDeleted){ // rowDeleted will return number of rows deleted
             if(rowDeleted === 1){
@@ -164,12 +169,8 @@ app.delete('/schedule/delete',function(req,res,next){ //registers the user to da
             }, function(err){
              console.log(err);
 
-// app.listen(3000,function () {
-//     console.log('Successfully started express application');
-
-// });
-
-
+            });
+});
 
 
 //running the server to listen on "PORT"
