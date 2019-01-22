@@ -31,6 +31,13 @@ app.get('/', function(req, res) {
         title : "Home"
     });
 });
+
+app.get('/dashboard', function(req, res) {
+    res.render('dashboard', {
+        title : "Dashboard"
+    });
+ });
+ 
 //EJS templating stops here/////////
 
 //passport usage begins here /////
