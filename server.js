@@ -115,15 +115,16 @@ function isAuthenticated(req,res,next){
 
 ///dashboard "writing and pulling from database" to render schedules start here//////
  
-app.put('/schedule/edit/:editTask/edit/:id',function(req,res,next){
+app.put('/schedule/put',function(req,res,next){
     
-    console.log(req.params);
+    console.log(req);
     db.schedule.update(
-        {name:req.params.editTask},
-        {where:req.params.id}
+        {event:req.body.event},
+        { where: { id: req.body.id } }
     )
     .then(function(rowsUpdate){
-        res.json(rowsUpdate)
+        console.log(req.body);
+        res.json(req.body);
     })
     .catch(next);
 });
@@ -152,8 +153,7 @@ console.log(req.body);
 
 
 
-
-app.delete('/schedule/delete/:id',function(req,res,next){ //registers the user to database
+app.delete('/schedule/delete',function(req,res,next){
     console.log(req);
     console.log(req.body);
     console.log(req.params);
@@ -168,8 +168,8 @@ app.delete('/schedule/delete/:id',function(req,res,next){ //registers the user t
             }
             }, function(err){
              console.log(err);
-
             });
+   
 });
 
 
