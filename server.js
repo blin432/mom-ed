@@ -11,7 +11,12 @@ var app = express();
 
 app.use (bodyParser.json());
 app.use (bodyParser.urlencoded({extended:true}));
-app.use(session({secret:'password'}));
+app.use(session({
+    secret:'password',
+    proxy: true,
+    resave: true,
+    saveUninitialized: true
+}));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.static(__dirname + '/public'));
