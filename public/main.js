@@ -86,16 +86,21 @@ function editAppear(editIndex){
 }
 
 ///function to write "write and get from database begins here"
+
 function editTask(presentTaskId){
     var editTaskInput=document.getElementById(`edit-field${presentTaskId}`);
 
-    axios.put(`/schedule/edit/${editTaskInput.value}/edit/${presentTaskId}`).then(function(response) {
-        var user = response;
-        console.log(user);
-        // alert(`Schedule created for ${name}`);
+    axios.put('/schedule/put', {event:editTaskInput.value,id:presentTaskId}).then(function(response) {
+        var user = response.data;
+        var id= document.getElementById(`list-${presentTaskId}`);
+        id.innerHTML=`${user.event}`;
     }).catch(function(){
         alert(`Please fill form in it's entirety`);
     });
+    var showChangeButton= document.getElementById(`save-button${presentTaskId}`);
+    var showEditField = document.getElementById(`edit-field${presentTaskId}`);
+    showChangeButton.style.setProperty("display","none");
+    showEditField.style.setProperty("display","none");
 }
 
 function showSchedulerForm(){
@@ -128,7 +133,6 @@ function showSchedule(){
                 <li id="list-${id}">${grabbedTask}</li> <span>
                 <span class="tex-align:center" >
                     <button type="button" onclick="deleteSchedule(${id})" class= "btn-primary" >Delete</button>
-                    <button type="button" onclick="completeTask(${id})" class= "btn-primary" >Complete</button>
                     <button type="button" onclick="editAppear(${id})" class= "btn-primary" >Edit</button>
                     <input id="edit-field${id}" style="display:none;"  type="text" class="form-control" >
                     <button id="save-button${id}" style="display:none;"  type="button" onclick="editTask(${id})"  class= "btn-primary" >Save Change</button>
@@ -142,10 +146,12 @@ function showSchedule(){
 
 
 function deleteSchedule(idNumber){
-    axios.delete(`/schedule/delete/${idNumber}`).then(function(response) {
-        var user = response.data.username;
+    axios.delete(`/schedule/delete/${idNumber}`,{id:idNumber}).then(function(response) {
+        console.log("hi");
+        console.log(idNumber);
+        var user = response.data;
         console.log(user);
-        alert(`Account created for ${user}`);
+        alert(`That user is already registered`);
     }).catch(function(){
         alert(`That user is already registered`);
     });

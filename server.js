@@ -115,15 +115,16 @@ function isAuthenticated(req,res,next){
 
 ///dashboard "writing and pulling from database" to render schedules start here//////
  
-app.put('/schedule/edit/:editTask/edit/:id',function(req,res,next){
+app.put('/schedule/put',function(req,res,next){
     
-    console.log(req.params);
+    console.log(req);
     db.schedule.update(
-        {name:req.params.editTask},
-        {where:req.params.id}
+        {event:req.body.event},
+        { where: { id: req.body.id } }
     )
     .then(function(rowsUpdate){
-        res.json(rowsUpdate)
+        console.log(req.body);
+        res.json(req.body);
     })
     .catch(next);
 });
@@ -152,15 +153,13 @@ console.log(req.body);
 
 
 
-
-app.delete('/schedule/delete/:id',function(req,res,next){ //registers the user to database
-    console.log(req);
-    console.log(req.body);
+app.delete('/schedule/delete/:id',function(req,res,next){
+   
     console.log(req.params);
        
         db.schedule.destroy({
             where: {
-               id: req.body.id //this will be your id that you want to delete
+               id: req.params.id //this will be your id that you want to delete
             }
             }).then(function(rowDeleted){ // rowDeleted will return number of rows deleted
             if(rowDeleted === 1){
@@ -168,8 +167,8 @@ app.delete('/schedule/delete/:id',function(req,res,next){ //registers the user t
             }
             }, function(err){
              console.log(err);
-
             });
+   
 });
 
 
