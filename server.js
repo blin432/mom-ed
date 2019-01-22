@@ -153,14 +153,13 @@ console.log(req.body);
 
 
 
-app.delete('/schedule/delete',function(req,res,next){
-    console.log(req);
-    console.log(req.body);
+app.delete('/schedule/delete/:id',function(req,res,next){
+   
     console.log(req.params);
        
         db.schedule.destroy({
             where: {
-               id: req.body.id //this will be your id that you want to delete
+               id: req.params.id //this will be your id that you want to delete
             }
             }).then(function(rowDeleted){ // rowDeleted will return number of rows deleted
             if(rowDeleted === 1){
