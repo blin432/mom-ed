@@ -162,7 +162,7 @@ function deleteSchedule(idNumber){
 
 
 
-// // CALENDAR JS
+
 // var date = Date.now() //Initializing Date Object.
 // //creates a Date object pointing to the current moment in time.
 
