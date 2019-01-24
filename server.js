@@ -4,24 +4,25 @@ const bcrypt = require('bcryptjs');
 const passport =require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const session = require('express-session');
-
-
 const db= require('./config/db.config.js'); 
+
 const app = express();
 
-
-
+//sets the ejs and where to look for ejs template
 app.set('view engine', 'ejs');
 app.set ('views','views/pages'); 
 
 app.use (bodyParser.json());
 app.use (bodyParser.urlencoded({extended:true}));
+
+//uses sesion for cookies
 app.use(session({
     secret:'password'
     // resave: true,
     // saveUninitialized: true
 }));
 
+//specifies what folder to use for express
 app.use(express.static(__dirname + '/public'));
 app.use(passport.initialize());
 app.use(passport.session());
@@ -47,7 +48,7 @@ app.get('/dashboard',isAuthenticated,function(req, res,next) {
 
 
 passport.use(new LocalStrategy({usernameField:'email'},function(email,password,done){
-    db.users.findAll({where:{email:email}}) //finding artist ID to print to console
+    db.users.findAll({where:{email:email}})
         .then(function(results){
             var fetchedPw= results[0].dataValues.password;//console log results to see how to get password
             console.log(results[0].dataValues.password);
@@ -61,12 +62,11 @@ passport.use(new LocalStrategy({usernameField:'email'},function(email,password,d
             }
             }).catch(function(err){
             console.log(err);
-            done(null, false)//passing in false means "note a succsefull login"
+            done(null, false)//null, is for error,passing in false means "note a succsefull login"
             });  
 }));
 
-
-
+// have to tell what goes in the cookie
 passport.serializeUser(function(user,done){
     done(null,{
         id: user.id,
@@ -74,6 +74,7 @@ passport.serializeUser(function(user,done){
     });
 });
 
+//when server needs to read a cookie, tells what the user should be 
 passport.deserializeUser(function(cookie,done){
     db.users.findAll({where:{id:cookie.id}})
         .then(function(user){
@@ -82,9 +83,8 @@ passport.deserializeUser(function(cookie,done){
         });
 });
 
-app.post('/auth/register',function(req,res,next){ //registers the user to database
-    console.log(req.body);
-        // req.isAuthenticated();  uses cookie and session to see if logged in or authenticated see function isAuthenticated
+app.post('/auth/register',function(req,res,next){ 
+        console.log(req.body);
         var hashedPw=bcrypt.hashSync(req.body.password,10);
         db.users.create({username:req.body.username,email:req.body.email,password:hashedPw})
         .then(function(user){
@@ -97,9 +97,11 @@ app.post('/auth/register',function(req,res,next){ //registers the user to databa
 // passport.authenticate('local'); endpoint will only run if logged in
 app.post('/auth/login',passport.authenticate('local'),function(req,res,next){
     req.isAuthenticated();
-    res.json({URL:'/dashboard'});
+    res.json({URL:'/dashboard'}); //telling window.location where to route to
 });
 
+
+//isAuthenticated is used to ask if user is logged in or not
 function isAuthenticated(req,res,next){
     if(req.isAuthenticated(req)){
         console.log(req);
@@ -110,42 +112,35 @@ function isAuthenticated(req,res,next){
 }
 
 
-
 app.get('/auth/logout', function (req, res) {
-    console.log('hi');
     res.json({URL:'/'});
     req.logout();
 });
  
+//isAuthenticated uses cookie and session to see if logged in or authenticated see function isAuthenticated
 app.put('/schedule/put',isAuthenticated,function(req,res,next){
-    console.log(req);
     db.schedule.update(
         {event:req.body.event},
         { where: { id: req.body.id } }
     )
     .then(function(rowsUpdate){
-        console.log(req.body);
         res.json(req.body);
     })
     .catch(next);
 });
 
 app.get('/schedule/get',isAuthenticated,function(req, res,next){
-    console.log(req.user);
     db.schedule.findAll() 
         .then(function(results){
-            console.log(req.user);
             res.json(results);      
     });  
-    console.log(req.user);
 });
 
 app.post('/schedule/post',isAuthenticated,function(req, res,next){
-    console.log(req.body);
     db.schedule.create({name:req.body.name,event:req.body.event,date:req.body.date})
         .then(function(user){
-            res.json({username:req.body.name});
-            return next(); ///res.json sends it back to front end 
+            res.json({username:req.body.name});///res.json sends information to front end
+            return next();  
         }).catch(function(err){
             console.log(err);
     });
@@ -159,16 +154,15 @@ app.delete('/schedule/delete/:id',isAuthenticated,function(req,res,next){
             where: {
                id: req.params.id //this will be your id that you want to delete
             }
-            }).then(function(rowDeleted){ // rowDeleted will return number of rows deleted
+            }).then(function(rowDeleted){
             if(rowDeleted === 1){
               console.log('Deleted successfully');
+              res.json({status:'deleted'});
             };
             }, function(err){
              console.log(err);
             });
 });
-
-
 
 var PORT = process.env.PORT || 3000;
 

@@ -35,14 +35,6 @@ function showSignUpForm(){
     signUpForm.style.setProperty("display","block");
 }
 
-// function showSchedulerForm(){
-//     user.style.setProperty("display","none");
-//     date.style.setProperty("display","none");
-//     event.style.setProperty("display","block");
-//     time.style.setProperty("display","none");
-   
-// }
-
 function cancel(){
     location.reload();
 }
@@ -83,6 +75,8 @@ function editTask(presentTaskId){
         var user = response.data;
         var id= document.getElementById(`list-${presentTaskId}`);
         id.innerHTML=`${user.event}`;
+        alert('please press view schedule to see changes');
+        location.reload();
     }).catch(function(){
         alert(`Please fill form in it's entirety`);
     });
@@ -96,7 +90,7 @@ function showSchedulerForm(){
     axios.post('/schedule/post', {name:user.value,event:event.value,date:date.value}).then(function(response) {
         var user = response.data;
         console.log(user);
-        // alert(`Schedule created for ${}`);
+        alert(`Task created! Click Show Schedule to see it!`);
     }).catch(function(){
         alert(`Please fill form in it's entirety`);
     });
@@ -108,6 +102,7 @@ function showSchedule(){
         console.log(user);
         arrayIndex=0;
         var grabbedTask=response.data[arrayIndex].name;
+        var date = response.data[arrayIndex].date
         var id = response.data[arrayIndex].id;
         response.data.forEach(function(task){
             console.log(task);
@@ -116,8 +111,8 @@ function showSchedule(){
             var grabbedTask= task.event;
             scheduleShow.innerHTML+=
             `<div style:"block;" id=${id}>
-                <li id="list-${id}">${grabbedTask}</li> <span>
-                <span class="tex-align:center" >
+                <li id="list-${id}" style="width:200px;"><span>${grabbedTask}</span><span style="margin-left: 20px;">${date}</span></li> 
+                <span class="text-align:center" >
                     <button type="button" onclick="deleteSchedule(${id})" class= "btn-primary" >Delete</button>
                     <button type="button" onclick="editAppear(${id})" class= "btn-primary" >Edit</button>
                     <input id="edit-field${id}" style="display:none;"  type="text" class="form-control" >
@@ -133,7 +128,8 @@ function deleteSchedule(idNumber){
         console.log(idNumber);
         var user = response.data;
         console.log(user);
-        alert(`That user is already registered`);
+        alert(`task${response.data.status}`);
+        location.reload();
     }).catch(function(){
         alert(`That user is already registered`);
     });
