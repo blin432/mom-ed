@@ -71,6 +71,12 @@ h5 {
 	/* padding-top:1%; */
 	margin-top: 2%;
 }
+h6 {
+	font-family: 'Fredoka One', cursive;
+	color: #ea3137;
+	font-size: 50px;
+	text-align: center;
+}
 
 
 .footer {
@@ -123,33 +129,50 @@ h5 {
 	}
 }
 
-/* .navbar{
-	background-color: #8875ce;
+/* css for dashboard */
+
+.navbar-brand{
+	font-family: 'Fredoka One', cursive;
+	
+}
+
+.schedule_form {
+	margin: auto;
+	width:25%
+
+}
+
+
+.navbar{
+	width: 100%;
+	height: 50px;
+	padding: 5px;
+	background: linear-gradient(-45deg,  #fcfcfc,#6c59b2,#ea3137, #1f2e84, #3fa2ff);
+	background-size: 400% 400%;
+	-webkit-animation: Gradient 15s ease infinite;
+	-moz-animation: Gradient 15s ease infinite;
+	animation: Gradient 15s ease infinite;
 	
   }
   
   
-  th {
-	text-align: center;
+  .buttons{
+	display: inline-block;
+	margin-bottom: 10%;
+
   }
-  
-  td{
-	text-align: right;
+
+  button, .btn-primary{
+	color: #ea3137;
+	background-color: #fcfcfc;
+	font-family: 'Fredoka One', cursive;
+	border-radius: 25px;
+	display: inline-block;
   }
-  
-  table, th, td {
-	border: 2px solid #000;
+
+  input{
+ 
+}
+  .show-schedule{
+	  color:#6c59b2
   }
-  
-  .schedule {
-	height: 1em;
-	
-  }
-  
-  #days {
-	width: 25%;
-  }
-  
-  #calendar {
-	
-  } */

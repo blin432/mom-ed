@@ -131,7 +131,7 @@ function showSchedule(){
             
             `<div style:"block;" id=${id}>
                 <li id="list-${id}">${grabbedTask}</li> <span>
-                <span class="tex-align:center" >
+                <span class="text-align:center" >
                     <button type="button" onclick="deleteSchedule(${id})" class= "btn-primary" >Delete</button>
                     <button type="button" onclick="editAppear(${id})" class= "btn-primary" >Edit</button>
                     <input id="edit-field${id}" style="display:none;"  type="text" class="form-control" >
