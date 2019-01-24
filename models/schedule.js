@@ -3,7 +3,7 @@ module.exports = (sequelize, DataTypes) => {
   const Schedule = sequelize.define('Schedule', {
     name: DataTypes.STRING,
     event: DataTypes.STRING,
-    date: DataTypes.INTEGER
+    date: DataTypes.STRING
   }, {});
   Schedule.associate = function(models) {
     // associations can be defined here

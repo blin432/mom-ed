@@ -91,6 +91,7 @@ function showSchedulerForm(){
         var user = response.data;
         console.log(user);
         alert(`Task created! Click Show Schedule to see it!`);
+        location.reload();
     }).catch(function(){
         alert(`Please fill form in it's entirety`);
     });
@@ -121,6 +122,7 @@ function showSchedule(){
             </div>`;               
         });
     });
+    
 }
 
 function deleteSchedule(idNumber){

@@ -11,20 +11,20 @@
                     <div id ="existing-member" style="display:block;">
                         <h4>Already a Member?</h4>
                         <div class="buttons">
-                            <button onclick="showLoginForm()" id="log-in-button" class="btn btn-secondary mb-2">Log in</button>
+                            <button onclick="showLoginForm()" id="log-in-button" >Log in</button>
                         </div>   
                     </div>
                     <div id="sign-up" style="display:block;">
                             <h4>New Member?</h4>
                             <div class="buttons">
-                                <button onclick="showSignUpForm()" id="sign-up-button" class="btn btn-secondary mb-2">Sign up</button>
+                                <button onclick="showSignUpForm()" id="sign-up-button">Sign up</button>
                             </div>
                     </div>
             </div>
 
             <div class="main-wrapper h-100 shadow-lg container-fluid  d-flex flex-column align-items-center text-center">
             
-                <div id="auth-box" class="auth-box shadow-lg p-3 mt-3" style="display:none;">
+                <div id="auth-box" class="auth-box shadow-lg p-3" style="display:none;">
 
                         <div id="sign-up-form" class="col text-center" style="display:none;">
 
@@ -38,8 +38,8 @@
                                     <input required="true" type="password" class="form-control" id="sign-up-password" name="sign-up-password" placeholder="Password">
 
                                     
-                                    <div  onclick="createNewAccount()" id="create-account-button" class=" mt-4 btn btn-secondary btn-block">Sign Up</div>
-                                    <button  onclick="cancel()" class=" mt-4 mb-4 btn btn-secondary btn-block">Cancel</button>
+                                    <button   style ="margin-left:60px;" onclick="createNewAccount()" id="create-account-button" >Sign Up</button>
+                                    <button  onclick="cancel()">Cancel</button>
                         </div>
 
                         <div id="log-in-form" class="col text-center mt-2" style="display:none;">
@@ -51,8 +51,8 @@
                                     <label for="login-password">Password</label>
                                     <input type="password" class="form-control" id="login-password" name="login-password" placeholder="">
                                 
-                                    <button  onclick="loginToExistingAccount()" class=" mt-4 btn btn-secondary btn-block">Log in</button>
-                                    <button  onclick="cancel()" class="btn btn-secondary btn-block">Cancel</button>
+                                    <button  onclick="loginToExistingAccount()">Log in</button>
+                                    <button  onclick="cancel()" >Cancel</button>
                         </div>
 
                     </div>
