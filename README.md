@@ -11,7 +11,10 @@ They can delete and edit these events from their current dashboard which is stor
 
 ## CONTRIBUTORS
 
-*Benjamin Lin
-*Hawazin Abdullah
-*Olivia Clay
-*Stephenna Corry
+* Benjamin Lin
+
+* Hawazin Abdullah
+
+* Olivia Clay
+
+* Stephenna Corry
