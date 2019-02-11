@@ -1,81 +1,44 @@
 
 <!DOCTYPE html>
 <html>
-
     <head>
         <% include ../partials/head.ejs %> 
     </head>
-
     <body>
-
-    <nav class="navbar navbar-expand-lg navbar-light border-bottom shadow-sm">
-      
-      <a class="navbar-brand" href="#">MOM'D</a>
-      
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      
-    <div class="collapse navbar-collapse" id="navbarText">
-        <ul class="navbar-nav mr-auto">
-            <div class="buttons">
-                <button  onclick="logOutButton()">Logout</button>
-              </div>
-        </ul>
-    
-        <span class="navbar-text">
-         FOR HOT MESS MOMS WITH HOT MESS FAMILIES  
-        </span>
-
-        <div class="buttons">
-          <button  onclick="logOutButton()">Logout</button>
+      <nav class="navbar navbar-expand-lg border-bottom shadow-sm navbar-dark d-flex flex-row justify-content-between">
+          <a class="navbar-brand" href="#">MOM'D</a> 
+            <div >
+              <button  onclick="logOutButton()">Logout</button>
+            </div>
+      </nav>   
+      <div class="container schedule-form text-align:center" >
+         <h6 class="mt-4">Schedule Your Mess:</h6>
+            <div class = "d-flex justify-content-center " id="input-form "> 
+              <form >
+                  <br> Who is this for?<br>
+                <input id="name-for-schedule" type="text"  placeholder="Name">
+                  <br>
+                    Event:
+                  <br>
+                <input id="event-for-schedule" type="text"  placeholder="Event goes here">
+                  <br>
+                    Hours:
+                  <br>
+                <input id="date-for-schedule" type="text"  placeholder="How Many Hours?">
+                <br><br>
+              </form>
+      </div>
+        <div class="buttons d-flex justify-content-center p-2">
+                <button class= "m-2" onclick="showSchedulerForm()">Schedule Me!</button>
+                <button  class= "m-2" onclick="showSchedule()">View Schedule</button>
         </div>
-
-    </div>
-    </nav>
-
-    
-         
-    <div id="calendar" class="work d-flex justify-content-center m-5 ">
-      <div id ="show-schedule"></div>        
-    </div>
-    
-
-    <h6>Schedule Your Mess:</h6>
-
-    <div class="container schedule_form text-align:center" >
-     
-
-    <div id="input-form"> 
-      <form >
-          <br> Who is this for?<br>
-        <input id="name-for-schedule" type="text"  placeholder="Name">
-          <br>
-            Event:
-          <br>
-        <input id="event-for-schedule" type="text"  placeholder="Event goes here">
-          <br>
-            Hours:
-          <br>
-        <input id="date-for-schedule" type="text"  placeholder="How Many Hours?">
-   
-        <br><br>
-         
-      </form>
-    </div>
-   
-
-    <div class="buttons">
-      <button onclick="showSchedulerForm()" >Schedule Me!</button>
-      <button onclick="showSchedule()">View Schedule</button>
-    </div>
-
-  </div>
-    
-    
-    <div class="footer" >
-      <% include ../partials/footer.ejs %>
-    </div>
+          <div id="calendar" class="work d-flex justify-content-center m-5 ">
+              <div id ="show-schedule" class="schedule"></div>        
+          </div>
+      </div>      
+            <div class="footer" >
+              <% include ../partials/footer.ejs %>
+            </div>
                 
       <% include ../partials/scripts.ejs %>
     </body>
