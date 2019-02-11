@@ -43,7 +43,6 @@
 	font-size: 10px; 
 	text-align: center;
 	color: #fff;
-	margin-top:10px;
 }
 
 h1 {
@@ -88,6 +87,8 @@ h6 {
 	-webkit-animation: Gradient 15s ease infinite;
 	-moz-animation: Gradient 15s ease infinite;
 	animation: Gradient 15s ease infinite;
+	position:100vh;
+	
 
 }
 
@@ -136,12 +137,24 @@ h6 {
 	
 }
 
-.schedule_form {
-	margin: auto;
-	width:25%
+label{
+	color:#ea3137;
+	font-size:18px;
+	font-family: 'Fredoka One', cursive;
+}
+.login-text{
+	color:#ea3137;
+	font-size:32px;
+	font-family: 'Fredoka One', cursive;
+}
+.schedule{
+	overflow:auto;
+	
+}
+.schedule-form{
+	min-height:80vh;
 
 }
-
 
 .navbar{
 	width: 100%;
@@ -158,7 +171,6 @@ h6 {
   
   .buttons{
 	display: inline-block;
-	margin-bottom: 10%;
 
   }
 
@@ -170,8 +182,12 @@ h6 {
 	display: inline-block;
   }
 
- 
-}
   .show-schedule{
 	  color:#6c59b2
+  }
+
+  @media only screen and (max-width:680px){
+	  h1{
+		  font-size:64px;
+	  }
   }
