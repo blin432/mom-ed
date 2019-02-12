@@ -77,7 +77,22 @@ h6 {
 	text-align: center;
 }
 
-
+.work{
+	margin:0;
+}
+.renderedSchedule{
+	width:100%;
+	padding:5px;
+	overflow:scroll;
+	border: 1px solid black;
+	background-color:#C77FD5;
+	margin:0 auto;
+	
+}
+.individual{
+	overflow:scroll;
+	
+}
 .footer {
 	width: 100%;
 	height: 150px;
@@ -88,8 +103,6 @@ h6 {
 	-moz-animation: Gradient 15s ease infinite;
 	animation: Gradient 15s ease infinite;
 	position:100vh;
-	
-
 }
 
 
@@ -148,12 +161,24 @@ label{
 	font-family: 'Fredoka One', cursive;
 }
 .schedule{
-	overflow:auto;
-	
+	width:100%;
+}
+.schedule-header{
+	width:100%;
+	padding:5px;
+	text-decoration: underline;
+	font-size:24px;
+	margin:0 auto;
 }
 .schedule-form{
 	min-height:80vh;
 
+}
+.auth-box{
+	overflow:auto;
+}
+.main-wrapper{
+	min-height:80vh;
 }
 
 .navbar{
@@ -180,12 +205,22 @@ label{
 	font-family: 'Fredoka One', cursive;
 	border-radius: 25px;
 	display: inline-block;
+	
   }
 
   .show-schedule{
 	  color:#6c59b2
   }
 
+table {
+	border-collapse: collapse;
+	width:100%;
+}
+td,th,tr {
+	border:1px solid #dddddd;
+	text-align:left;
+	padding:8px;
+}
   @media only screen and (max-width:680px){
 	  h1{
 		  font-size:64px;

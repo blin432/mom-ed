@@ -27,13 +27,20 @@
                 <input id="date-for-schedule" type="text"  placeholder="How Many Hours?">
                 <br><br>
               </form>
-      </div>
+            </div>
         <div class="buttons d-flex justify-content-center p-2">
                 <button class= "m-2" onclick="showSchedulerForm()">Schedule Me!</button>
                 <button  class= "m-2" onclick="showSchedule()">View Schedule</button>
         </div>
-          <div id="calendar" class="work d-flex justify-content-center m-5 ">
-              <div id ="show-schedule" class="schedule"></div>        
+          <div id="calendar" class="work m-auto">
+              <div class="row schedule-header">
+                <div class="col-3">Name</div>
+                <div class="col-3">Activity</div>
+                <div class="col-3">Hours</div>
+                <div class="col-3">Action</div>
+              </div>
+              <div id ="show-schedule" class="schedule "> 
+              </div>       
           </div>
       </div>      
             <div class="footer" >

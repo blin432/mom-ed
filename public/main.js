@@ -111,15 +111,27 @@ function showSchedule(){
             var id = task.id;
             var grabbedTask= task.event;
             scheduleShow.innerHTML+=
-            `<div style:"block;" id=${id}>
-                <li id="list-${id}" style="width:200px;"><span>${grabbedTask}</span><span style="margin-left: 20px;">${date}</span></li> 
-                <span class="text-align:center" >
-                    <button type="button" onclick="deleteSchedule(${id})" class= "btn-primary" >Delete</button>
-                    <button type="button" onclick="editAppear(${id})" class= "btn-primary" >Edit</button>
-                    <input id="edit-field${id}" style="display:none;"  type="text" class="form-control" >
-                    <button id="save-button${id}" style="display:none;"  type="button" onclick="editTask(${id})"  class= "btn-primary" >Save Change</button>
-                </span>
-            </div>`;               
+                    
+                   `<div id=${id}  class="row renderedSchedule">
+                   <div class="col-3 individual">${name}</div>
+                   <div id="list-${id}" class="col-3 individual">${grabbedTask}<input id="edit-field${id}" style="display:none;"  type="text" class="form-control" ></div>
+                   <div class="col-3 individual">${date}</div>
+                   <div class="col-3 individual">
+                        <button type="button" onclick="deleteSchedule(${id})" class= "btn-primary" >Delete</button>
+                        <button type="button" onclick="editAppear(${id})" class= "btn-primary" >Edit</button><div>
+                       <button id="save-button${id}" style="display:none;"  type="button" onclick="editTask(${id})"  class= "btn-primary" >Save Change</button>
+                   </div>`
+                   
+           
+            // <div style:"block;" id=${id}> 
+            //     <li id="list-${id}" style="width:200px;"><span>${grabbedTask}</span><span style="margin-left: 20px;">${date}</span></li> 
+            //     <span class="text-align:center" >
+            //         <button type="button" onclick="deleteSchedule(${id})" class= "btn-primary" >Delete</button>
+            //         <button type="button" onclick="editAppear(${id})" class= "btn-primary" >Edit</button>
+            //         <input id="edit-field${id}" style="display:none;"  type="text" class="form-control" >
+            //         <button id="save-button${id}" style="display:none;"  type="button" onclick="editTask(${id})"  class= "btn-primary" >Save Change</button>
+            //     </span>
+            // </div>`;               
         });
     });
     
