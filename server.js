@@ -130,14 +130,17 @@ app.put('/schedule/put',isAuthenticated,function(req,res,next){
 });
 
 app.get('/schedule/get',isAuthenticated,function(req, res,next){
-    db.schedule.findAll() 
+    db.schedule.findAll({
+        
+       order:[['hours','DESC']]
+    }) 
         .then(function(results){
             res.json(results);      
     });  
 });
 
 app.post('/schedule/post',isAuthenticated,function(req, res,next){
-    db.schedule.create({name:req.body.name,event:req.body.event,date:req.body.date})
+    db.schedule.create({name:req.body.name,event:req.body.event,hours:req.body.hours})
         .then(function(user){
             res.json({username:req.body.name});///res.json sends information to front end
             return next();  

@@ -12,7 +12,7 @@ var userPassword = document.getElementById("sign-up-password");
 var loginEmail = document.getElementById("login-email");
 var loginPw = document.getElementById("login-password");
 var user = document.getElementById("name-for-schedule");
-var date = document.getElementById("date-for-schedule");
+var hours = document.getElementById("hours-for-schedule");
 var event = document.getElementById("event-for-schedule");
 var time = document.getElementById("time-for-schedule");
 var scheduleShow = document.getElementById("show-schedule");
@@ -47,7 +47,7 @@ function createNewAccount(){
         location.reload();
         alert("please login after creating account");
     }).catch(function(){
-        alert(`That user is already registered`);
+        alert(`Error in loggin in`);
     });
 }
 
@@ -75,7 +75,7 @@ function editTask(presentTaskId){
         var user = response.data;
         var id= document.getElementById(`list-${presentTaskId}`);
         id.innerHTML=`${user.event}`;
-        alert('please press view schedule to see changes');
+        alert('Change was Successful');
         location.reload();
     }).catch(function(){
         alert(`Please fill form in it's entirety`);
@@ -87,10 +87,10 @@ function editTask(presentTaskId){
 }
 
 function showSchedulerForm(){
-    axios.post('/schedule/post', {name:user.value,event:event.value,date:date.value}).then(function(response) {
+    axios.post('/schedule/post', {name:user.value,event:event.value,hours:hours.value}).then(function(response) {
         var user = response.data;
         console.log(user);
-        alert(`Task created! Click Show Schedule to see it!`);
+        alert(`Task created!`);
         location.reload();
     }).catch(function(){
         alert(`Please fill form in it's entirety`);
@@ -103,35 +103,25 @@ function showSchedule(){
         console.log(user);
         arrayIndex=0;
         var grabbedTask=response.data[arrayIndex].name;
-        var date = response.data[arrayIndex].date
+        var hours = response.data[arrayIndex].hours
         var id = response.data[arrayIndex].id;
         response.data.forEach(function(task){
             console.log(task);
             var name= task.name;
             var id = task.id;
+            var hours = task.hours;
             var grabbedTask= task.event;
             scheduleShow.innerHTML+=
                     
                    `<div id=${id}  class="row renderedSchedule">
                    <div class="col-3 individual">${name}</div>
                    <div id="list-${id}" class="col-3 individual">${grabbedTask}<input id="edit-field${id}" style="display:none;"  type="text" class="form-control" ></div>
-                   <div class="col-3 individual">${date}</div>
+                   <div class="col-3 individual">${hours}</div>
                    <div class="col-3 individual">
                         <button type="button" onclick="deleteSchedule(${id})" class= "btn-primary" >Delete</button>
                         <button type="button" onclick="editAppear(${id})" class= "btn-primary" >Edit</button><div>
                        <button id="save-button${id}" style="display:none;"  type="button" onclick="editTask(${id})"  class= "btn-primary" >Save Change</button>
-                   </div>`
-                   
-           
-            // <div style:"block;" id=${id}> 
-            //     <li id="list-${id}" style="width:200px;"><span>${grabbedTask}</span><span style="margin-left: 20px;">${date}</span></li> 
-            //     <span class="text-align:center" >
-            //         <button type="button" onclick="deleteSchedule(${id})" class= "btn-primary" >Delete</button>
-            //         <button type="button" onclick="editAppear(${id})" class= "btn-primary" >Edit</button>
-            //         <input id="edit-field${id}" style="display:none;"  type="text" class="form-control" >
-            //         <button id="save-button${id}" style="display:none;"  type="button" onclick="editTask(${id})"  class= "btn-primary" >Save Change</button>
-            //     </span>
-            // </div>`;               
+                   </div>`           
         });
     });
     
@@ -142,7 +132,7 @@ function deleteSchedule(idNumber){
         console.log(idNumber);
         var user = response.data;
         console.log(user);
-        alert(`task${response.data.status}`);
+        alert(`${response.data.status}`);
         location.reload();
     }).catch(function(){
         alert(`That user is already registered`);
