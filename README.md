@@ -7,7 +7,7 @@ MOM'D is a scheduler web app that allows users to add each of their family membe
 
 MOM'd uses Heroku PostgresSQL, sequelize, PassportJS, and EJS templating.
 Users are able to login using PassportJs and see their events current scheduled events. 
-They can delete and edit these events from their current dashboard which is stored within their user information on PostgresSQL.
+They are able to trigger CRUD operations from the current dashboard which has stored user information on PostgresSQL.
 
 ## CONTRIBUTORS
 
